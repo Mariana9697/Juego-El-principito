@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juego El Principito</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0e68c;
+            text-align: center;
+            padding: 20px;
+        }
+        .question {
+            margin: 20px 0;
+            display: none;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 10px;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        #result {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+        #finalResult {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Juego sobre El Principito</h1>
+    <div id="quiz">
+        <div class="question" id="question1">
+            <p>1. ¿Quién narra la historia?</p>
+            <button onclick="answer(1, true)">El autor narra la historia</button>
+            <button onclick="answer(1, false)">El piloto</button>
+        </div>
+        <div class="question" id="question2">
+            <p>2. ¿Cuál es su profesión?</p>
+            <button onclick="answer(2, true)">Piloto de aviones</button>
+            <button onclick="answer(2, false)">Escritor</button>
+        </div>
+        <div class="question" id="question3">
+            <p>3. ¿Qué causó que la eligiera?</p>
+            <button onclick="answer(3, true)">Porque le gustaba viajar</button>
+            <button onclick="answer(3, false)">Por su familia</button>
+        </div>
+        <div class="question" id="question4">
+            <p>4. ¿Por qué dice que los grandes no comprendían los mensajes de los niños?</p>
+            <button onclick="answer(4, true)">Porque no comprendían los dibujos de los niños</button>
+            <button onclick="answer(4, false)">Porque eran mayores</button>
+        </div>
+        <div class="question" id="question5">
+            <p>Bonus: ¿Quién fue el autor del Principito?</p>
+            <button onclick="answer(5, false)">Walt Disney</button>
+            <button onclick="answer(5, true)">Antoine de Saint-Exupéry</button>
+            <button onclick="answer(5, false)">J.K. Rowling</button>
+        </div>
+    </div>
+    <div id="result"></div>
+    <div id="finalResult"></div>
+    <a id="whatsappLink" href="#" style="display:none;">Compartir en WhatsApp</a>
+
+    <script>
+        let currentQuestion = 1;
+        const totalQuestions = 5;
+
+        document.getElementById('question1').style.display = 'block';
+
+        function answer(questionNumber, correct) {
+            const result = document.getElementById('result');
+            if (correct) {
+                result.innerText = `Respuesta de la pregunta ${questionNumber}: Correcta!`;
+            } else {
+                result.innerText = `Respuesta de la pregunta ${questionNumber}: Incorrecta.`;
+            }
+
+            if (currentQuestion < totalQuestions) {
+                document.getElementById(`question${currentQuestion}`).style.display = 'none';
+                currentQuestion++;
+                document.getElementById(`question${currentQuestion}`).style.display = 'block';
+            } else {
+                showFinalResult();
+            }
+        }
+
+        function showFinalResult() {
+            document.getElementById('quiz').style.display = 'none';
+            document.getElementById('result').style.display = 'none';
+            const finalResult = document.getElementById('finalResult');
+            finalResult.innerHTML = '<h2>Juego Finalizado</h2><p>¡Gracias por jugar!</p>';
+            finalResult.style.display = 'block';
+            document.getElementById('whatsappLink').href = `https://wa.me/?text=He%20jugado%20un%20juego%20sobre%20El%20Principito%20y%20aprend%C3%AD%20sobre%20su%20historia.`;
+            document.getElementById('whatsappLink').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
